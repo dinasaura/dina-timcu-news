@@ -16,7 +16,7 @@ const App = () => {
           <TextGrey>Думай и решай свободно</TextGrey>
         </Logo>
         <Routes>
-          <Route exact path="/" element={<ArticleList />} />
+          <Route path="/" element={<ArticleList />} />
           <Route path="/article/:id" element={<ArticlePage />} />
         </Routes>
       </div>

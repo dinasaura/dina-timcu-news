@@ -12,8 +12,8 @@ import {
   TextHeaderGrey,
   TitleTextArticlePage,
 } from "./style";
-import eyeSvg from "../../assets/icons/eye.svg";
 import { imageLinksPrefix } from "../../constants";
+
 
 const GET_ARTICLE = gql`
   query GetArticle($articleId: String!) {
@@ -39,29 +39,26 @@ const GET_ARTICLE = gql`
   }
 `;
 
-const ArticlePage = () => {
-  const { id } = useParams();
-
-  const articleId = id.toString();
+const ArticlePage: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
+  
 
   const { loading, error, data } = useQuery(GET_ARTICLE, {
-    variables: { articleId },
+    variables: { articleId: id },
   });
 
-  if (loading) return <div>Caricamento in corso...</div>;
-  if (error) return <div>Errore: {error.message}</div>;
+  if (loading) return <ArticleContainer>Loading...</ArticleContainer>;
+  if (error) return <ArticleContainer>Error: {error.message}</ArticleContainer>;
 
-  const article = data.content;
+  const article = data?.content;
 
-  if (!article) return <div>Articolo non trovato</div>;
 
   return (
-    <>
       <ArticleContainer>
         <ContainerDataView>
           <TextHeaderGrey>{article.dates.updated}</TextHeaderGrey>
           <div>
-            <img src={eyeSvg} alt="Eye Icon" />
+          <img src='https://point.md/static/svg/new-icons/eye.svg' />
             <TextHeaderGrey>{article.counters.view}</TextHeaderGrey>
           </div>
         </ContainerDataView>
@@ -74,7 +71,7 @@ const ArticlePage = () => {
         />
         <ArticlePageImageContainer>
           <ArticlePageImage
-            src={imageLinksPrefix.articleBig + article.thumbnail}
+            src={`${imageLinksPrefix.articleBig}${article.thumbnail}`}
           />
         </ArticlePageImageContainer>
         <FigcaptionImage>{article.description.thumbnail}</FigcaptionImage>
@@ -82,7 +79,6 @@ const ArticlePage = () => {
           dangerouslySetInnerHTML={{ __html: article.description.long }}
         />
       </ArticleContainer>
-    </>
   );
 };
 

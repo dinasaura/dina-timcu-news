@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { mobile, mobileMini, tablet } from "../../constants";
 
-export const ArticleItem = styled.li`
+export const ContainerForItem = styled.li`
   display: flex;
   margin-bottom: 20px;
 `;
@@ -68,7 +68,7 @@ export const StyledLink = styled(Link)`
   }
 `;
 
-export const ContainerForArticle = styled.ul`
+export const ContainerForPost= styled.ul`
   padding: 1px;
 `;
 
