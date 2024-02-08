@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useQuery, gql } from "@apollo/client";
-import { ArticleContainer } from "../index";
+import { ArticleContainer } from "../Container/Container";
 import {
   ArticlePageImage,
   ArticlePageImageContainer,
@@ -12,12 +12,16 @@ import {
   TextHeaderGrey,
   TitleTextArticlePage,
 } from "./style";
-import { imageLinksPrefix } from "../../constants";
+import { imageLinksPrefix, projectId } from "../../constants";
 
 
 const GET_ARTICLE = gql`
   query GetArticle($articleId: String!) {
-    content(id: $articleId) {
+    content(
+      project_id: "${projectId}"
+      lang: "ru"
+      id: $articleId
+      ) {
       id
       title {
         short

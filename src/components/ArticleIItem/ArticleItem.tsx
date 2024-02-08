@@ -7,7 +7,7 @@ import {
   ContainerForItem,
 } from "../ArticlesList/style";
 import { imageLinksPrefix } from "../../constants";
-import { TextGrey } from "../../style";
+import { TextGrey } from "../Container/Container";
 import { Content } from "../../__generated__/graphql";
 
 interface Props {
@@ -27,7 +27,7 @@ const ArticleItem: React.FC<Props> = ({ article }) => {
         <StyledLink to={`/article/${article.id}`}>
           <h3>{article?.title?.short}</h3>
         </StyledLink>
-        <SubtitleText>{article?.description?.intro}</SubtitleText>
+        <SubtitleText dangerouslySetInnerHTML={{ __html: article?.description?.intro || "" }}/>
         <TextGrey>{article?.dates?.updated}</TextGrey>
       </ArticleInfo>
     </ContainerForItem>

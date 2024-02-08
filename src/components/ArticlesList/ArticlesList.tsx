@@ -1,16 +1,17 @@
 import React from "react";
 import { useQuery, gql } from "@apollo/client";
-import { ArticleContainer } from "../index";
+import { ArticleContainer } from "../Container/Container";
 import ArticleItem from "../ArticleIItem/ArticleItem";
 import { ContainerForPost } from "./style";
 import { Content, GetArticlesQuery, GetArticlesQueryVariables } from "../../__generated__/graphql";
 import DetectVisibility from "../DetectVisibility/DetectVisibility";
+import { projectId } from "../../constants";
 
 
 const GET_ARTICLES = gql`
   query GetArticles($take: Int, $skip: Int) {
     contents(
-      project_id: "5107de83-f208-4ca4-87ed-9b69d58d16e1"
+      project_id: "${projectId}"
       lang: "ru"
       skip: $skip
       take: $take
