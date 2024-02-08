@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; 
+import ArticleList from './components/ArticleList/ArticleList';
+import ArticlePage from './components/ArticlePage/ArticlePage';
+import { Logo } from './components/ArticleList/style';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div>
+      <Logo>
+        <image src={'https://point.md/static/svg/new-point-logo.svg'} alt='logo'/>
+      </Logo>
+        <Routes> 
+          <Route exact path="/" element={<ArticleList />} /> 
+          <Route path="/article/:id" element={<ArticlePage />} /> 
+        </Routes>
+      </div>
+    </Router>
   );
-}
+};
 
 export default App;
