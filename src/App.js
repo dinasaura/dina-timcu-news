@@ -9,7 +9,7 @@ const App = () => {
     <Router>
       <div>
       <Logo>
-        <image src={'https://point.md/static/svg/new-point-logo.svg'} alt='logo'/>
+        <img src={'https://point.md/static/svg/new-point-logo.svg'} alt='logo'/>
       </Logo>
         <Routes> 
           <Route exact path="/" element={<ArticleList />} /> 

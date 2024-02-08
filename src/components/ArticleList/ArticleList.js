@@ -33,20 +33,6 @@ const ArticleList = () => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
-  // const calculateTimeDifference = (updated) => {
-  //   const diffInMs = Date.now() - updated * 1000;
-  //   const diffInMinutes = Math.floor(diffInMs / (1000 * 60));
-  
-  //   if (diffInMinutes >= 60) {
-  //     const diffInHours = Math.floor(diffInMinutes / 60);
-  //     return `${diffInHours} hour${diffInHours === 1 ? '' : 's'} ago`;
-  //   } else if (diffInMinutes >= 1) {
-  //     return `${diffInMinutes} minute${diffInMinutes === 1 ? '' : 's'} ago`;
-  //   } else {
-  //     return `Just now`;
-  //   }
-  // };
-
   return (
     <>
       <ArticleContainer>

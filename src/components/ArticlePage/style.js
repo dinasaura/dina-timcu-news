@@ -1,5 +1,16 @@
 import styled from 'styled-components';
 
+export const ContainerDataView= styled.div`
+display:flex;
+gap: 20px;
+`
+
+export const ArticlePageImageContainer = styled.div`
+position: relative;
+width: auto;
+height: max-content;
+`
+
 export const ArticlePageImage = styled.img`
   flex: 0 0 auto;
   height: auto;
@@ -23,17 +34,6 @@ export const SubTitleTextArticlePage = styled.h2`
   margin: 0;
 `;
 
-export const ArticlePageImageContainer = styled.div`
-position: relative;
-width: auto;
-height: max-content;
-max-width: 825px;
-`
-
-export const ContainerDataView= styled.div`
-display:flex;
-gap: 20px;
-`
 
 export const FigcaptionImage= styled.figcaption`
 color: rgb(128, 128, 128);

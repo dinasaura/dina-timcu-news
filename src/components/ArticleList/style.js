@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
+export const tablet = '850px';
+export const mobile = '480px';
+export const mobileMini = '320px';
+
 
 export const ArticleItem = styled.li`
   display: flex;
@@ -14,6 +18,10 @@ export const ArticleListImage = styled.img`
   margin-right: 20px;
   border-radius: 4px;
   cursor: pointer;
+
+  @media (max-width: ${mobile}) {
+    width: 144px;
+  }
 `;
 
 export const ArticleInfo = styled.div`
@@ -39,7 +47,33 @@ export const StyledLink = styled(Link)`
 
   h3{
     margin:0;
-    font-size: 24px
+    font-size: 24px;
+    line-height: 26px;
+    text-align: left;
+    text-size-adjust: 100%;
+    letter-spacing: normal;
+    padding-bottom: 10px;
+  }
+
+  @media (max-width: ${tablet}) {
+    h3 {
+      font-size: 20px;
+    }
+  }
+
+  @media (max-width: ${mobile}) {
+    h3 {
+      font-size: 14px;
+      line-height: 16px;
+    }
+  }
+
+  @media (max-width: ${mobileMini}) {
+    h3 {
+      font-size: 12px;
+      line-height: 14px;
+      font-weight: 100;
+    }
   }
 `;
 
@@ -51,10 +85,15 @@ export const SubtitleText = styled.ul`
   color: rgb(15, 23, 42);
   font-size: 16px;
   padding: 0;
+
+  @media (max-width: ${tablet}) {
+    display: none;
+  }
   
 `;
 
 export const Logo = styled.div`
   text-align: center;
   margin-bottom: 20px;
+  paddind: 20px;
 `;
