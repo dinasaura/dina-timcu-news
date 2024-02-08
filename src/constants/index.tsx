@@ -9,3 +9,6 @@ export const tablet = '850px';
 export const mobile = '480px';
 export const mobileMini = '320px';
 
+export const logoUrl = 'https://point.md/static/svg/new-point-logo.svg';
+export const eyeUrl ='https://point.md/static/svg/new-icons/eye.svg';
+

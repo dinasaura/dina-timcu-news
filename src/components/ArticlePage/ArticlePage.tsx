@@ -12,8 +12,7 @@ import {
   TextHeaderGrey,
   TitleTextArticlePage,
 } from "./style";
-import { imageLinksPrefix, projectId } from "../../constants";
-
+import { eyeUrl, imageLinksPrefix, projectId } from "../../constants";
 
 const GET_ARTICLE = gql`
   query GetArticle($articleId: String!) {
@@ -45,7 +44,6 @@ const GET_ARTICLE = gql`
 
 const ArticlePage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  
 
   const { loading, error, data } = useQuery(GET_ARTICLE, {
     variables: { articleId: id },
@@ -56,33 +54,32 @@ const ArticlePage: React.FC = () => {
 
   const article = data?.content;
 
-
   return (
-      <ArticleContainer>
-        <ContainerDataView>
-          <TextHeaderGrey>{article.dates.updated}</TextHeaderGrey>
-          <div>
-          <img src='https://point.md/static/svg/new-icons/eye.svg' />
-            <TextHeaderGrey>{article.counters.view}</TextHeaderGrey>
-          </div>
-        </ContainerDataView>
+    <ArticleContainer>
+      <ContainerDataView>
+        <TextHeaderGrey>{article.dates.updated}</TextHeaderGrey>
+        <div>
+          <img src={eyeUrl} />
+          <TextHeaderGrey>{article.counters.view}</TextHeaderGrey>
+        </div>
+      </ContainerDataView>
 
-        <TitleTextArticlePage
-          dangerouslySetInnerHTML={{ __html: article.title.short }}
+      <TitleTextArticlePage
+        dangerouslySetInnerHTML={{ __html: article.title.short }}
+      />
+      <SubTitleTextArticlePage
+        dangerouslySetInnerHTML={{ __html: article.description.intro }}
+      />
+      <ArticlePageImageContainer>
+        <ArticlePageImage
+          src={`${imageLinksPrefix.articleBig}${article.thumbnail}`}
         />
-        <SubTitleTextArticlePage
-          dangerouslySetInnerHTML={{ __html: article.description.intro }}
-        />
-        <ArticlePageImageContainer>
-          <ArticlePageImage
-            src={`${imageLinksPrefix.articleBig}${article.thumbnail}`}
-          />
-        </ArticlePageImageContainer>
-        <FigcaptionImage>{article.description.thumbnail}</FigcaptionImage>
-        <ContainerSubTitleText
-          dangerouslySetInnerHTML={{ __html: article.description.long }}
-        />
-      </ArticleContainer>
+      </ArticlePageImageContainer>
+      <FigcaptionImage>{article.description.thumbnail}</FigcaptionImage>
+      <ContainerSubTitleText
+        dangerouslySetInnerHTML={{ __html: article.description.long }}
+      />
+    </ArticleContainer>
   );
 };
 

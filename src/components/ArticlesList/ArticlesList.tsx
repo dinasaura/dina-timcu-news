@@ -3,10 +3,13 @@ import { useQuery, gql } from "@apollo/client";
 import { ArticleContainer } from "../Container/Container";
 import ArticleItem from "../ArticleIItem/ArticleItem";
 import { ContainerForPost } from "./style";
-import { Content, GetArticlesQuery, GetArticlesQueryVariables } from "../../__generated__/graphql";
+import {
+  Content,
+  GetArticlesQuery,
+  GetArticlesQueryVariables,
+} from "../../__generated__/graphql";
 import DetectVisibility from "../DetectVisibility/DetectVisibility";
 import { projectId } from "../../constants";
-
 
 const GET_ARTICLES = gql`
   query GetArticles($take: Int, $skip: Int) {
@@ -32,26 +35,29 @@ const GET_ARTICLES = gql`
 `;
 
 const ArticlesList = () => {
-  const { loading, error, data, fetchMore } = useQuery<GetArticlesQuery, GetArticlesQueryVariables>(GET_ARTICLES, {
+  const { loading, error, data, fetchMore } = useQuery<
+    GetArticlesQuery,
+    GetArticlesQueryVariables
+  >(GET_ARTICLES, {
     variables: {
       take: 10,
-      skip: 0
+      skip: 0,
     },
   });
 
-  if (loading) return <ArticleContainer>Loading...</ArticleContainer>;;
+  if (loading) return <ArticleContainer>Loading...</ArticleContainer>;
   if (error) return <ArticleContainer>Error: {error.message}</ArticleContainer>;
 
   const articles = data?.contents || [];
 
-  function onVisibleLastItem(){
+  function onVisibleLastItem() {
     fetchMore({
       variables: {
         skip: articles.length,
         take: 10,
-      }
-    })
-  };
+      },
+    });
+  }
 
   return (
     <ArticleContainer>
