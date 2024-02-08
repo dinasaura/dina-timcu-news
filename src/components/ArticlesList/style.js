@@ -1,10 +1,6 @@
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-
-export const tablet = '850px';
-export const mobile = '480px';
-export const mobileMini = '320px';
-
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { mobile, mobileMini, tablet } from "../../constants";
 
 export const ArticleItem = styled.li`
   display: flex;
@@ -29,24 +25,19 @@ export const ArticleInfo = styled.div`
   flex-direction: column;
 `;
 
-export const LastModified = styled.span`
-  margin-top: 5px;
-  font-size: 12px;
-`;
-
 export const StyledLink = styled(Link)`
-  color: black; 
-  text-decoration: none; 
-  transition: color 0.1s ease; 
+  color: black;
+  text-decoration: none;
+  transition: color 0.1s ease;
   line-height: 1.2;
-    text-size-adjust: 100%;
+  text-size-adjust: 100%;
 
   &:hover {
-    color: rgb(255, 71, 0); 
+    color: rgb(255, 71, 0);
   }
 
-  h3{
-    margin:0;
+  h3 {
+    margin: 0;
     font-size: 24px;
     line-height: 26px;
     text-align: left;
@@ -89,11 +80,4 @@ export const SubtitleText = styled.ul`
   @media (max-width: ${tablet}) {
     display: none;
   }
-  
-`;
-
-export const Logo = styled.div`
-  text-align: center;
-  margin-bottom: 20px;
-  paddind: 20px;
 `;

@@ -1,8 +1,19 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
-import { useQuery, gql } from '@apollo/client';
-import { ArticleContainer } from '../Container';
-import { ArticlePageImage, ArticlePageImageContainer, ContainerDataView, ContainerSubTitleText, FigcaptionImage, SubTitleTextArticlePage, TitleTextArticlePage } from './style';
+import React from "react";
+import { useParams } from "react-router-dom";
+import { useQuery, gql } from "@apollo/client";
+import { ArticleContainer } from "../index";
+import {
+  ArticlePageImage,
+  ArticlePageImageContainer,
+  ContainerDataView,
+  ContainerSubTitleText,
+  FigcaptionImage,
+  SubTitleTextArticlePage,
+  TextHeaderGrey,
+  TitleTextArticlePage,
+} from "./style";
+import eyeSvg from "../../assets/icons/eye.svg";
+import { imageLinksPrefix } from "../../constants";
 
 const GET_ARTICLE = gql`
   query GetArticle($articleId: String!) {
@@ -21,20 +32,20 @@ const GET_ARTICLE = gql`
       dates {
         updated: updated(format: "mm", lang: "ru", getDiff: true)
       }
-      counters{
+      counters {
         view
       }
+    }
   }
-}
 `;
 
 const ArticlePage = () => {
   const { id } = useParams();
 
-  const articleId = id.toString(); 
-  
+  const articleId = id.toString();
+
   const { loading, error, data } = useQuery(GET_ARTICLE, {
-    variables: { articleId }
+    variables: { articleId },
   });
 
   if (loading) return <div>Caricamento in corso...</div>;
@@ -48,19 +59,28 @@ const ArticlePage = () => {
     <>
       <ArticleContainer>
         <ContainerDataView>
-         <p>{article.counters.view}</p> 
-         <p>{article.dates.updated}</p> 
+          <TextHeaderGrey>{article.dates.updated}</TextHeaderGrey>
+          <div>
+            <img src={eyeSvg} alt="Eye Icon" />
+            <TextHeaderGrey>{article.counters.view}</TextHeaderGrey>
+          </div>
         </ContainerDataView>
 
-      <TitleTextArticlePage dangerouslySetInnerHTML={{__html : article.title.short}}/>
-      <SubTitleTextArticlePage dangerouslySetInnerHTML={{__html : article.description.intro}}/>
-      <ArticlePageImageContainer>
-        <ArticlePageImage src={`https://i.simpalsmedia.com/point.md/news/370x194/${article.thumbnail}`} />
-      </ArticlePageImageContainer>
-      <FigcaptionImage>
-        {article.description.thumbnail}
-      </FigcaptionImage>
-      <ContainerSubTitleText dangerouslySetInnerHTML={{__html : article.description.long}}/>
+        <TitleTextArticlePage
+          dangerouslySetInnerHTML={{ __html: article.title.short }}
+        />
+        <SubTitleTextArticlePage
+          dangerouslySetInnerHTML={{ __html: article.description.intro }}
+        />
+        <ArticlePageImageContainer>
+          <ArticlePageImage
+            src={imageLinksPrefix.articleBig + article.thumbnail}
+          />
+        </ArticlePageImageContainer>
+        <FigcaptionImage>{article.description.thumbnail}</FigcaptionImage>
+        <ContainerSubTitleText
+          dangerouslySetInnerHTML={{ __html: article.description.long }}
+        />
       </ArticleContainer>
     </>
   );
